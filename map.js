@@ -13,6 +13,7 @@ function initialize(){
     };
     map = new google.maps.Map(document.getElementById('map-canvas'),
 			      mapOptions);
+    JSON.parse(xhr.responseText);
 }
 
 function getMyLocation(){
@@ -45,6 +46,7 @@ function sendRequest(){
     }
     xhr.send("login=Anita&lat=" + myLat + "&lng=" + myLng);
 }	
+
 /*
 Number.prototype.toRad = function() {
    return this * Math.PI / 180;
