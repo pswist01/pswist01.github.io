@@ -1,6 +1,7 @@
 var myLocation;
 var myLat;
 var myLng;
+var xhr;
 
 function initialize(){
     getMyLocation();
@@ -41,7 +42,7 @@ function getMyLocation(){
 		position: myLocation,
 		map: map,
 		title:"My Position"
-		var xhr = new XMLHttpRequest();
+		xhr = new XMLHttpRequest();
 		xhr.open("POST", "http://chickenofthesea.herokuapp.com/sendLocation", true);
 		xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 		xhr.onload = function() {
