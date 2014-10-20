@@ -41,25 +41,22 @@ function getMyLocation(){
 		position: myLocation,
 		map: map,
 		title:"My Position"
+		var xhr = new XMLHttpRequest();
+		xhr.open("POST", "http://chickenofthesea.herokuapp.com/sendLocation", true);
+		xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+		xhr.onload = function() {
+		    alert(xhr.responseText);
+		}
+		xhr.send("login=Anita&lat=" + myLat + "&lng=" + myLng);
+		
 	    });
 	});
-	sendRequest();
     }
     else{
 	alert("not working");
     }
 }
 
-function sendRequest(){
-    var xhr = new XMLHttpRequest();
-    xhr.open("POST", "http://chickenofthesea.herokuapp.com/sendLocation", true);
-//come back to chane params
-    xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    xhr.onload = function() {
-            alert(xhr.responseText);
-    }
-    xhr.send("login=Anita&lat=" + myLat + "&lng=" + myLng);
-}
 /*
 Number.prototype.toRad = function() {
    return this * Math.PI / 180;
