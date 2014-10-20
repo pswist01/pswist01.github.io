@@ -54,7 +54,7 @@ function sendRequest(){
     var xhr = new XMLHttpRequest();
     xhr.open("POST", "http://chickenofthesea.herokuapp.com/sendLocation", true);
 //come back to chane params
-    xhr.setRequestHeader("JSON", "http://chickenofthesea.herokuapp.com/sendLocation");
+    xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xhr.onload = function() {
             alert(xhr.responseText);
     }
