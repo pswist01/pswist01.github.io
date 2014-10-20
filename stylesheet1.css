@@ -1,0 +1,19 @@
+body {
+    background-color: red;
+}
+
+h1 {
+    text-align: center;
+}
+
+h2 {
+    color: white;
+}
+
+p {
+    color: green;
+}
+
+p.blue {
+    color: blue;
+}
