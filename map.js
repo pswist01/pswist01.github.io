@@ -5,6 +5,7 @@ var image = {
     url: "download.jpg",
     scaledSize: new google.maps.Size(25,25)
 };
+
 function initialize(){
     getMyLocation();
     var mapOptions = {
@@ -13,7 +14,6 @@ function initialize(){
     };
     map = new google.maps.Map(document.getElementById('map-canvas'),
 			      mapOptions);
-    JSON.parse(xhr.responseText);
 }
 
 function getMyLocation(){
@@ -41,8 +41,11 @@ function sendRequest(){
     var xhr = new XMLHttpRequest();
     xhr.open("POST", "http://chickenofthesea.herokuapp.com/sendLocation", true);
     xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    xhr.onload = function() {
-	alert(xhr.responseText);
+    xhr.onreadystatechange = function() {
+	if(http.readyState == 4 && http.status == 200) {
+            alert(http.responseText);
+	    JSON.parse(xhr.responseText);
+	}
     }
     xhr.send("login=Anita&lat=" + myLat + "&lng=" + myLng);
 }	
