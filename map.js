@@ -58,7 +58,7 @@ function sendRequest(){
     xhr.onload = function() {
             alert(xhr.responseText);
     }
-    xhr.send("login=Anita&lat=myLat&lng=myLng");
+    xhr.send("login=Anita&lat=" + myLat + "&lng=" + myLng);
 }
 /*
 Number.prototype.toRad = function() {
