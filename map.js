@@ -1,7 +1,10 @@
 var myLocation;
 var myLat;
 var myLng;
-
+var image = {
+    url: "download.jpg",
+    scaledSize: new google.maps.Size(25,25)
+};
 function initialize(){
     getMyLocation();
     var mapOptions = {
@@ -23,7 +26,7 @@ function getMyLocation(){
 		position: myLocation,
 		map: map,
 		title:"My Position",
-		icon: "download.jpg"
+		icon: image
 	    });
 	    sendRequest();
 	});
