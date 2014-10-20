@@ -42,7 +42,7 @@ function sendRequest(){
     xhr.open("POST", "http://chickenofthesea.herokuapp.com/sendLocation", true);
     xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xhr.onreadystatechange = function() {
-	if(xhr.readyState == 4 && http.status == 200) {
+	if(xhr.readyState == 4 && xhr.status == 200) {
             alert(xhr.responseText);
 	    JSON.parse(xhr.responseText);
 	}
