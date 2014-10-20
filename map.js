@@ -23,7 +23,7 @@ function getMyLocation(){
 		position: myLocation,
 		map: map,
 		title:"My Position",
-		icon: download.jpg
+		icon: "download.jpg"
 	    });
 	    sendRequest();
 	});
