@@ -64,7 +64,7 @@ function showOthers(parsed){
 	charName = parsed["characters"][i]["name"];
 	charLat = parsed["characters"][i]["loc"]["latitude"];
 	charLng = parsed["characters"][i]["loc"]["longitude"];
-	charNote = parsed["characters"][1]["loc"]["note"];
+	charNote = parsed["characters"][i]["loc"]["note"];
 	if (charName == "carmen")
 	    charImage = "carmen.png";
 	if (charName == "waldo")
