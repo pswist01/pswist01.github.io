@@ -6,6 +6,8 @@ var charLng;
 var charLocation;
 var charName;
 var charImage;
+var charNote;
+var charContent;
 var image = {
     url: "download.jpg",
     scaledSize: new google.maps.Size(25,25)
@@ -62,6 +64,7 @@ function showOthers(parsed){
 	charName = parsed["characters"][i]["name"];
 	charLat = parsed["characters"][i]["loc"]["latitude"];
 	charLng = parsed["characters"][i]["loc"]["longitude"];
+	charNote = parsed["characters"][1]["loc"]["note"];
 	if (charName == "carmen")
 	    charImage = "carmen.png";
 	if (charName == "waldo")
@@ -74,14 +77,27 @@ function showOthers(parsed){
 	    charImage = "snape.png";
 	if (charName == "hescott")
 	    charImage = "hescott.png";
-
 	charLocation = new google.maps.LatLng(charLat, charLng);
+
+	charContent = charName + ", " + charLat + ", " + charLng + ", " + charNote;
+	var infowindow = new google.maps.InfoWindow({
+	    content: charContent
+	});
+
 	var marker = new google.maps.Marker({
 	    position: charLocation,
 	    map: map,
 	    title: charName,
 	    icon: charImage
 	});
+	
+	google.maps.event.addListener(marker, 'click', function() {
+	    infowindow.open(map,marker);
+	});
+    }
+    for (i in parsed["students"])
+    {
+
     }
 }
 
