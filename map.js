@@ -9,6 +9,7 @@ var charImage;
 var charNote;
 var charContent;
 var charTime;
+var charMarker;
 var image = {
     url: "download.jpg",
     scaledSize: new google.maps.Size(25,25)
@@ -84,16 +85,16 @@ function showOthers(parsed){
 	var infowindow = new google.maps.InfoWindow({
 	    content: charContent
 	});
-
-	var marker = new google.maps.Marker({
+	charMarker = charName;
+	var charMarker = new google.maps.Marker({
 	    position: charLocation,
 	    map: map,
 	    title: charName,
 	    icon: charImage
 	});
 	
-	google.maps.event.addListener(marker, 'click', function() {
-	    infowindow.open(map,marker);
+	google.maps.event.addListener(charMarker, 'click', function() {
+	    infowindow.open(map,charMarker);
 	});
     }
     for (i in parsed["students"])
