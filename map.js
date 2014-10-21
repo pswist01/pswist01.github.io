@@ -58,7 +58,7 @@ function sendRequest(){
 }
 
 function showOthers(parsed){
-    for (i in characters){
+    for (i in parsed["characters"]){
 	charName = parsed["characters"][i]["name"];
 	charLat = parsed["characters"][i]["loc"]["latitude"];
 	charLng = parsed["characters"][i]["loc"]["longitude"];
