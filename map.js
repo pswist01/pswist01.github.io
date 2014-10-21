@@ -10,8 +10,18 @@ var charNote;
 var charContent;
 var charTime;
 var path;
+var distance;
+var lat1;
+var lat2;
+var lon1;
+var lon2;
+var distWindLoc;
 var image = {
     url: "download.jpg",
+    scaledSize: new google.maps.Size(25,25)
+};
+var image2 = {
+    url: "target.jpg",
     scaledSize: new google.maps.Size(25,25)
 };
 
@@ -33,6 +43,7 @@ function getMyLocation(){
 	    myLat = position.coords.latitude;
 	    myLng = position.coords.longitude;
 	    myLocation = new google.maps.LatLng(myLat, myLng);
+	    distWindLoc = new google.maps.LatLng(myLat, myLng + .005);
 	    charContent = "Parker, " + myLat + ", " + myLng;
 	    var marker = new google.maps.Marker({
 		position: myLocation,
@@ -74,6 +85,7 @@ function showOthers(parsed){
 	charLat = parsed["characters"][i]["loc"]["latitude"];
 	charLng = parsed["characters"][i]["loc"]["longitude"];
 	charNote = parsed["characters"][i]["loc"]["note"];
+	distance = calcDistance(myLat, myLng, charLat, charLng);
 	if (charName == "carmen")
 	    charImage = "carmen.png";
 	if (charName == "waldo")
@@ -88,7 +100,7 @@ function showOthers(parsed){
 	    charImage = "hescott.png";
 	charLocation = new google.maps.LatLng(charLat, charLng);
 
-	charContent = charName + ", " + charLat + ", " + charLng + ", " + charNote;
+	charContent = charName + ", " + charLat + ", " + charLng + ", " + charNote + ", " + distance;
 	
 	var marker = new google.maps.Marker({
 	    position: charLocation,
@@ -116,6 +128,7 @@ function showOthers(parsed){
 	});
 
 	linePath.setMap(map);
+
     }
     for (i in parsed["students"])
     {
@@ -141,17 +154,28 @@ function showOthers(parsed){
     }
 }
 
-/*
+/*function showDistances(){
+    var distancewindow = new google.maps.InfoWindow({
+	content: distance
+    });
+    
+    var marker = new google.maps.Marker({
+	position: distWindLoc,
+	map: map,
+	icon: image2
+    });
+    google.maps.event.addListener(marker, 'click', function() {
+	infowindow.open(map,marker);
+    });
+}
+*/
+
 Number.prototype.toRad = function() {
    return this * Math.PI / 180;
 }
 
-var lat2 = 42.741; 
-var lon2 = -71.3161; 
-var lat1 = 42.806911; 
-var lon1 = -71.290611; 
-
-var R = 6371; // km 
+function calcDistance(lat1, lon1, lat2, lon2){ 
+var R = 6371; // km
 
 var x1 = lat2-lat1;
 var dLat = x1.toRad();  
@@ -163,4 +187,5 @@ var a = Math.sin(dLat/2) * Math.sin(dLat/2) +
 var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
 var d = R * c; 
 
-alert(d);*/
+return d;
+}
