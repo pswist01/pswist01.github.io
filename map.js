@@ -98,7 +98,7 @@ function showOthers(parsed){
     }
     for (i in parsed["students"])
     {
-	charName = parsed["students"][i]["login"];
+/*	charName = parsed["students"][i]["login"];
 	charLat = parsed["students"][i]["lat"];
 	charLng = parsed["students"][i]["lng"];
 	charTime = parsed["students"][i]["created_at"];
@@ -116,7 +116,7 @@ function showOthers(parsed){
 	
 	google.maps.event.addListener(marker, 'click', function() {
 	    infowindow.open(map,marker);
-	});
+	});*/
     }
 }
 
