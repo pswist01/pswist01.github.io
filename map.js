@@ -75,7 +75,7 @@ function showOthers(parsed){
 	if (charName == "hescott")
 	    charImage = "hescott.png";
 
-	charLocation = new google.maps.LatLng(myLat, myLng);
+	charLocation = new google.maps.LatLng(charLat, charLng);
 	var marker = new google.maps.Marker({
 	    position: charLocation,
 	    map: map,
