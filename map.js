@@ -9,6 +9,7 @@ var charImage;
 var charNote;
 var charContent;
 var charTime;
+var path;
 var image = {
     url: "download.jpg",
     scaledSize: new google.maps.Size(25,25)
@@ -102,6 +103,19 @@ function showOthers(parsed){
 	    infowindow.setContent(this.content);
 	    infowindow.open(map,this);
 	});
+	path = [
+	    myLocation,
+	    charLocation
+	];
+	var linePath = new google.maps.Polyline({
+	    path: path,
+	    geodesic: true,
+	    strokeColor: '#FF0000',
+	    strokeOpacity: 1.0,
+	    strokeWeight: 2
+	});
+
+	linePath.setMap(map);
     }
     for (i in parsed["students"])
     {
