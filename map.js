@@ -82,7 +82,7 @@ function showOthers(parsed){
 
 	charContent = charName + ", " + charLat + ", " + charLng + ", " + charNote;
 	var infowindow = new google.maps.InfoWindow({
-	    content: charContent;
+	    content: charContent
 	});
 
 	var marker = new google.maps.Marker({
@@ -105,7 +105,7 @@ function showOthers(parsed){
 	charLocation = new google.maps.LatLng(charLat, charLng);
 	charContent = charName + ", " + charLat + ", " + charLng + ", " + charTime;
 	var infowindow = new google.maps.InfoWindow({
-	    content: charContent;
+	    content: charContent
 	});
 
 	var marker = new google.maps.Marker({
