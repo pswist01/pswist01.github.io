@@ -1,10 +1,16 @@
 var myLocation;
 var myLat;
 var myLng;
+var charLat;
+var charLng;
+var charLocation;
+var charName;
+var charImage;
 var image = {
     url: "download.jpg",
     scaledSize: new google.maps.Size(25,25)
 };
+
 
 function initialize(){
     getMyLocation();
@@ -44,11 +50,40 @@ function sendRequest(){
     xhr.onreadystatechange = function() {
 	if(xhr.readyState == 4 && xhr.status == 200) {
             alert(xhr.responseText);
-	    JSON.parse(xhr.responseText);
+	    var parsed = JSON.parse(xhr.responseText);
+	    showOthers(parsed);
 	}
     }
     xhr.send("login=Anita&lat=" + myLat + "&lng=" + myLng);
-}	
+}
+
+function showOthers(parsed){
+    for (i in characters){
+	charName = parsed["characters"][i]["name"];
+	charLat = parsed["characters"][i]["loc"]["latitude"];
+	charLng = parsed["characters"][i]["loc"]["longitude"];
+	if (charName == "carmen")
+	    charImage = "carmen.png";
+	if (charName == "waldo")
+	    charImage = "waldo.png";
+	if (charName == "batman")
+	    charImage = "batman.png";
+	if (charName == "nr")
+	    charImage = "nr.png";
+	if (charName == "snape")
+	    charImage = "snape.png";
+	if (charName == "hescott")
+	    charImage = "hescott.png";
+
+	charLocation = new google.maps.LatLng(myLat, myLng);
+	var marker = new google.maps.Marker({
+	    position: charLocation,
+	    map: map,
+	    title: charName,
+	    icon: charImage
+	});
+    }
+}
 
 /*
 Number.prototype.toRad = function() {
