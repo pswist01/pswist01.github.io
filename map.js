@@ -14,7 +14,7 @@ var image = {
     scaledSize: new google.maps.Size(25,25)
 };
 
-
+infowindow = new google.maps.InfoWindow();
 function initialize(){
     getMyLocation();
     var mapOptions = {
@@ -32,11 +32,18 @@ function getMyLocation(){
 	    myLat = position.coords.latitude;
 	    myLng = position.coords.longitude;
 	    myLocation = new google.maps.LatLng(myLat, myLng);
+	    charContent = "Parker, " + myLat + ", " + myLng;
 	    var marker = new google.maps.Marker({
 		position: myLocation,
 		map: map,
 		title:"My Position",
-		icon: image
+		icon: image,
+		content: charContent
+	    });
+	    google.maps.event.addListener(marker, 'click', function() {
+		infowindow.close();
+		infowindow.setContent(this.content);
+		infowindow.open(map,this);
 	    });
 	    sendRequest();
 	});
@@ -81,18 +88,19 @@ function showOthers(parsed){
 	charLocation = new google.maps.LatLng(charLat, charLng);
 
 	charContent = charName + ", " + charLat + ", " + charLng + ", " + charNote;
-	var infowindow = new google.maps.InfoWindow({
-	    content: charContent
-	});
+	
 	var marker = new google.maps.Marker({
 	    position: charLocation,
 	    map: map,
 	    title: charName,
-	    icon: charImage
+	    icon: charImage,
+	    content: charContent
 	});
 	
 	google.maps.event.addListener(marker, 'click', function() {
-	    infowindow.open(map,marker);
+	    infowindow.close();
+	    infowindow.setContent(this.content);
+	    infowindow.open(map,this);
 	});
     }
     for (i in parsed["students"])
@@ -103,19 +111,18 @@ function showOthers(parsed){
 	charTime = parsed["students"][i]["created_at"];
 	charLocation = new google.maps.LatLng(charLat, charLng);
 	charContent = charName + ", " + charLat + ", " + charLng + ", " + charTime;
-	var infowindow = new google.maps.InfoWindow({
-	    content: charContent
-	});
-
 
 	var marker = new google.maps.Marker({
 	    position: charLocation,
 	    map: map,
 	    title: charName,
+	    content: charContent
 	});
 
 	google.maps.event.addListener(marker, 'click', function() {
-	    infowindow.open(map,marker);
+	    infowindow.close();
+	    infowindow.setContent(this.content);
+	    infowindow.open(map,this);
 	});
     }
 }
