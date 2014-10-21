@@ -103,18 +103,17 @@ function showOthers(parsed){
 	charTime = parsed["students"][i]["created_at"];
 	charLocation = new google.maps.LatLng(charLat, charLng);
 	charContent = charName + ", " + charLat + ", " + charLng + ", " + charTime;
-	var infowindow = new google.maps.InfoWindow({
-	    content: charContent
-	});
 
 	var marker = new google.maps.Marker({
 	    position: charLocation,
 	    map: map,
 	    title: charName,
-	});
-	
-	google.maps.event.addListener(marker, 'click', function() {
-	    infowindow.open(map,marker);
+	    var infowindow = new google.maps.InfoWindow({
+		content: charContent
+	    });
+	    google.maps.event.addListener(marker, 'click', function() {
+		infowindow.open(map,marker);
+	    });
 	});
     }
 }
