@@ -9,7 +9,6 @@ var charImage;
 var charNote;
 var charContent;
 var charTime;
-var charMarker;
 var image = {
     url: "download.jpg",
     scaledSize: new google.maps.Size(25,25)
@@ -85,21 +84,20 @@ function showOthers(parsed){
 	var infowindow = new google.maps.InfoWindow({
 	    content: charContent
 	});
-	charMarker = charName;
-	var charMarker = new google.maps.Marker({
+	var marker = new google.maps.Marker({
 	    position: charLocation,
 	    map: map,
 	    title: charName,
 	    icon: charImage
 	});
 	
-	google.maps.event.addListener(charMarker, 'click', function() {
-	    infowindow.open(map,charMarker);
+	google.maps.event.addListener(marker, 'click', function() {
+	    infowindow.open(map,marker);
 	});
     }
     for (i in parsed["students"])
     {
-/*	charName = parsed["students"][i]["login"];
+	charName = parsed["students"][i]["login"];
 	charLat = parsed["students"][i]["lat"];
 	charLng = parsed["students"][i]["lng"];
 	charTime = parsed["students"][i]["created_at"];
@@ -117,7 +115,7 @@ function showOthers(parsed){
 	
 	google.maps.event.addListener(marker, 'click', function() {
 	    infowindow.open(map,marker);
-	});*/
+	});
     }
 }
 
