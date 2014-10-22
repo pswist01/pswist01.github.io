@@ -10,7 +10,8 @@ var charNote;
 var charContent;
 var charTime;
 var path;
-var distance;
+var distances = new Object();
+var counter = 0; 
 var lat1;
 var lat2;
 var lon1;
@@ -18,11 +19,7 @@ var lon2;
 var distWindLoc;
 var image = {
     url: "download.jpg",
-    scaledSize: new google.maps.Size(25,25)
-};
-var image2 = {
-    url: "target.jpg",
-    scaledSize: new google.maps.Size(25,25)
+    scaledSize: new google.maps.Size(40,40)
 };
 
 infowindow = new google.maps.InfoWindow();
@@ -43,20 +40,6 @@ function getMyLocation(){
 	    myLat = position.coords.latitude;
 	    myLng = position.coords.longitude;
 	    myLocation = new google.maps.LatLng(myLat, myLng);
-	    distWindLoc = new google.maps.LatLng(myLat, myLng + .005);
-	    charContent = "Parker, " + myLat + ", " + myLng;
-	    var marker = new google.maps.Marker({
-		position: myLocation,
-		map: map,
-		title:"My Position",
-		icon: image,
-		content: charContent
-	    });
-	    google.maps.event.addListener(marker, 'click', function() {
-		infowindow.close();
-		infowindow.setContent(this.content);
-		infowindow.open(map,this);
-	    });
 	    sendRequest();
 	});
     }
@@ -85,7 +68,6 @@ function showOthers(parsed){
 	charLat = parsed["characters"][i]["loc"]["latitude"];
 	charLng = parsed["characters"][i]["loc"]["longitude"];
 	charNote = parsed["characters"][i]["loc"]["note"];
-	distance = calcDistance(myLat, myLng, charLat, charLng);
 	if (charName == "carmen")
 	    charImage = "carmen.png";
 	if (charName == "waldo")
@@ -100,7 +82,7 @@ function showOthers(parsed){
 	    charImage = "hescott.png";
 	charLocation = new google.maps.LatLng(charLat, charLng);
 
-	charContent = charName + ", " + charLat + ", " + charLng + ", " + charNote + ", " + distance;
+	charContent = charName + ", " + charLat + ", " + charLng + ", " + charNote;
 	
 	var marker = new google.maps.Marker({
 	    position: charLocation,
@@ -128,7 +110,8 @@ function showOthers(parsed){
 	});
 
 	linePath.setMap(map);
-
+	distances[i] = {"character": charName, "dist":calcDistance(myLat, myLng, charLat, charLng)}; 
+counter++;
     }
     for (i in parsed["students"])
     {
@@ -152,23 +135,27 @@ function showOthers(parsed){
 	    infowindow.open(map,this);
 	});
     }
-}
-
-/*function showDistances(){
-    var distancewindow = new google.maps.InfoWindow({
-	content: distance
-    });
-    
+    //distances.sort();
+    charContent = "";
+    for(i = 0; i<counter; i++){
+	charContent += distances[i].character;
+	charContent += " ";
+	charContent += distances[i].dist;
+	charContent += "</p><p>";
+    } 
     var marker = new google.maps.Marker({
-	position: distWindLoc,
+	position: myLocation,
 	map: map,
-	icon: image2
+	title:"My Position",
+	icon: image,
+	content: charContent
     });
     google.maps.event.addListener(marker, 'click', function() {
-	infowindow.open(map,marker);
+	infowindow.close();
+	infowindow.setContent(this.content);
+	infowindow.open(map,this);
     });
 }
-*/
 
 Number.prototype.toRad = function() {
    return this * Math.PI / 180;
