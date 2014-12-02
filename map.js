@@ -50,7 +50,7 @@ function getMyLocation(){
 
 function sendRequest(){
     var xhr = new XMLHttpRequest();
-    xhr.open("POST", "http://chickenofthesea.herokuapp.com/sendLocation", true);
+    xhr.open("POST", "https://stormy-inlet-9240.herokuapp.com/sendLocation", true);
     xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xhr.onreadystatechange = function() {
 	if(xhr.readyState == 4 && xhr.status == 200) {
